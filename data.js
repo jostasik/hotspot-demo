@@ -1,4 +1,4 @@
-var Hotspots = [
+var hotspots = [
   {
     Latitude: 40.409777438573904,
     Longitude: -74.23323365772569,
@@ -292,35 +292,3 @@ var polygonData = [
     ],
   },
 ]
-
-let map = L.map("map").setView([40.409777438573904, -74.23323365772569], 13)
-L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-  maxZoom: 18,
-  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-}).addTo(map)
-
-var layer = L.geoJSON(polygonData, {
-  style: {
-    color: "blue",
-  },
-})
-
-var markerIcon = L.icon({
-  iconUrl: "pizza-pin.svg",
-  iconSize: [30, 30],
-})
-// Add the layer to the map
-map.addLayer(layer)
-let markers = []
-for (var i in Hotspots) {
-  let marker = L.marker([Hotspots[i].Latitude, Hotspots[i].Longitude], {
-    icon: markerIcon,
-  }).addTo(map)
-  marker.bindPopup(Hotspots[i].Name, {
-    closeButton: false,
-    autoClose: true,
-  })
-  markers.push(marker)
-}
-
-map.fitBounds(group.getBounds())
